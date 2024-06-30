@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieLayered", "MovieLayered\MovieLayered.csproj", "{718FBB0B-1CA9-4094-9BB6-5C5135FFD57D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieLayered.BLL", "MovieLayered.BLL\MovieLayered.BLL.csproj", "{F8973D1A-F935-4AC0-9BEF-CA54C14F13E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieLayered.DAL", "MovieLayered.DAL\MovieLayered.DAL.csproj", "{6C4FDDC4-37E7-4839-8128-5584138C72D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{718FBB0B-1CA9-4094-9BB6-5C5135FFD57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{718FBB0B-1CA9-4094-9BB6-5C5135FFD57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{718FBB0B-1CA9-4094-9BB6-5C5135FFD57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8973D1A-F935-4AC0-9BEF-CA54C14F13E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8973D1A-F935-4AC0-9BEF-CA54C14F13E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8973D1A-F935-4AC0-9BEF-CA54C14F13E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8973D1A-F935-4AC0-9BEF-CA54C14F13E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C4FDDC4-37E7-4839-8128-5584138C72D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C4FDDC4-37E7-4839-8128-5584138C72D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C4FDDC4-37E7-4839-8128-5584138C72D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C4FDDC4-37E7-4839-8128-5584138C72D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
