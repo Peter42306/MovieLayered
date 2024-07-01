@@ -7,12 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MovieLayered.BLL\MovieLayered.BLL.csproj" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Views\" />
+    <ProjectReference Include="..\MovieLayered.BLL\MovieLayered.BLL.csproj" />
   </ItemGroup>
 
 </Project>
