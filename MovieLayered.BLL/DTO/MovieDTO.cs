@@ -22,6 +22,7 @@ namespace MovieLayered.BLL.DTO
         [Required(ErrorMessage = "Поле должно быть установлено")]
         public int ReleaseYear { get; set; }
 
+        [Required(ErrorMessage = "Поле должно быть установлено")]
         public string? PosterPath { get; set; }
 
         [Required(ErrorMessage = "Поле должно быть установлено")]

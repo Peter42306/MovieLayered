@@ -4,8 +4,7 @@ using MovieLayered.DAL.Entities;
 namespace MovieLayered.DAL.EF
 {
 	public class MovieContext : DbContext
-	{
-		// Набор данных фильмов
+	{		
 		public DbSet<Movie> Movies { get; set; }
 
 		public MovieContext(DbContextOptions<MovieContext> options) : base(options)
@@ -57,20 +56,10 @@ namespace MovieLayered.DAL.EF
 					ReleaseYear = 1965,
 					PosterPath = "~/Image/Kanikuly-Bonifaciya_1659775259-630x315.jpg",
 					Description = "Цирковой лев Бонифаций отправляется на каникулы в Африку. Но и там он продолжает развлекать детишек своим творчеством."
-				},
+				},				
 				new Movie
 				{
 					Id = 5,
-					Title = "Каникулы Бонифация",
-					Director = "Фёдор Хитрук",
-					Genre = "Приключения",
-					ReleaseYear = 1965,
-					PosterPath = "~/Image/Kanikuly-Bonifaciya_1659775259-630x315.jpg",
-					Description = "Цирковой лев Бонифаций отправляется на каникулы в Африку. Но и там он продолжает развлекать детишек своим творчеством."
-				},
-				new Movie
-				{
-					Id = 6,
 					Title = "Приключения кота Леопольда",
 					Director = "Аркадий Хайт",
 					Genre = "Комедия, приключения",
@@ -80,7 +69,7 @@ namespace MovieLayered.DAL.EF
 				},
 				new Movie
 				{
-					Id = 7,
+					Id = 6,
 					Title = "Малыш и Карлсон",
 					Director = "Борис Степанцов",
 					Genre = "Малыш и Карлсон",
@@ -90,7 +79,7 @@ namespace MovieLayered.DAL.EF
 				},
 				new Movie
 				{
-					Id = 8,
+					Id = 7,
 					Title = "Ну, погоди!",
 					Director = "Аркадий Хайт",
 					Genre = "Комедия",
@@ -100,7 +89,7 @@ namespace MovieLayered.DAL.EF
 				},
 				new Movie
 				{
-					Id = 9,
+					Id = 8,
 					Title = "Приключения капитана Врунгеля",
 					Director = "Давид Черкасский",
 					Genre = "Приключения, музыкальный",
@@ -110,7 +99,7 @@ namespace MovieLayered.DAL.EF
 				},
 				new Movie
 				{
-					Id = 10,
+					Id = 9,
 					Title = "Тайна третьей планеты",
 					Director = "Роман Качанов",
 					Genre = "Фантастика, приключения",
@@ -120,7 +109,7 @@ namespace MovieLayered.DAL.EF
 				},
 				new Movie
 				{
-					Id = 11,
+					Id = 10,
 					Title = "Умка",
 					Director = "Владимир Пекарь",
 					Genre = "Сказка, приключения",
@@ -130,7 +119,7 @@ namespace MovieLayered.DAL.EF
 				},
 				new Movie
 				{
-					Id = 12,
+					Id = 11,
 					Title = "Кошаки",
 					Director = "Леопольд",
 					Genre = "Фильм про кошаков",
@@ -140,7 +129,7 @@ namespace MovieLayered.DAL.EF
 				},
 				new Movie
 				{
-					Id = 13,
+					Id = 12,
 					Title = "Кошаки 2",
 					Director = "Леопольд",
 					Genre = "Фильм про кошаков",
@@ -150,7 +139,7 @@ namespace MovieLayered.DAL.EF
 				},
 				new Movie
 				{
-					Id = 14,
+					Id = 13,
 					Title = "Кошаки 3",
 					Director = "Леопольд",
 					Genre = "Фильм про кошаков",

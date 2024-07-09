@@ -12,7 +12,7 @@
 <div style="padding-top:30px; margin-bottom:20px;">
     <h1 class="text-lg-center; text-muted;">Это страница Views/Movie/Index</h1>
     <hr />
-    <h2>Информация о 10 лучших фильмах</h2>
+    <h2>Информация о 10 лучших фильмах (Layered)</h2>
 
     @* Url.Action - это метод Razor, который генерирует URL для указанного действия контроллера.
     Он принимает два параметра: имя действия и имя контроллера.
@@ -36,7 +36,9 @@
     {
         <div class="col-md-2">
             <div class="card" style="margin-bottom:10px;">
-                <img src="@item.PosterPath" alt="@item.Title" class="card-img-top" />
+                <img src="@Url.Content(item.PosterPath)" alt="@item.Title" class="card-img-top" />
+                @* <menuitem src="@Url.Content(item.PosterPath)" *@
+                @* <img src="@item.PosterPath" alt="@item.Title" class="card-img-top" /> *@
                 <div class="card-body">
                     <div class="card-title" style="white-space:normal; margin-bottom:10px">
                         @Html.DisplayFor(modelItem => item.Title)

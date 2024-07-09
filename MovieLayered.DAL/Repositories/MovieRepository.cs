@@ -36,11 +36,15 @@ namespace MovieLayered.DAL.Repositories
         public async Task Create(Movie movie)
         {
             await _movieContext.Movies.AddAsync(movie);
+            await _movieContext.SaveChangesAsync();
+
+            //await _movieContext.Movies.AddAsync(movie);
         }
 
         public async void Update(Movie movie)
         {
             _movieContext.Entry(movie).State= EntityState.Modified;
+            await _movieContext.SaveChangesAsync();
         }
 
 
@@ -50,6 +54,9 @@ namespace MovieLayered.DAL.Repositories
             if (movie != null)
             {
                 _movieContext.Movies.Remove(movie);
+                await _movieContext.SaveChangesAsync();
+
+                //_movieContext.Movies.Remove(movie);
             }
 
             //Movie? movie = await _movieContext.Movies.FirstAsync(id);

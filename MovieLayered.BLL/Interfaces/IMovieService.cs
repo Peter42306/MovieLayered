@@ -4,10 +4,11 @@ namespace MovieLayered.BLL.Interfaces
 {
     public interface IMovieService
     {
-        Task CreateMovie(MovieDTO movieDto);
-        Task UpdateMovie(MovieDTO movieDto);
-        Task DeleteMovie(int id);
+        Task<IEnumerable<MovieDTO>> GetAllMovies();
         Task<MovieDTO> GetMovie(int id);
-        Task<IEnumerable<MovieDTO>> GetMovies();
+		Task<MovieDTO> GetMovie(string title);
+		Task CreateMovie(MovieDTO movieDto);
+        Task UpdateMovie(MovieDTO movieDto);
+        Task DeleteMovie(int id);        
     }
 }

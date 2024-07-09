@@ -27,22 +27,22 @@ namespace MovieLayered.Controllers
 
 		///////////////////////////////////////////////////////////////////////////////////////////
 
-		// GET запрос для отображения всех фильмов в списке
+		// GET запрос для отображения всех фильмов в списке				
 		public async Task<IActionResult> Index()
 		{
 			//var model = await _repository.GetAll();
 
-            var model=await _movieService.GetMovies();
+			var model = await _movieService.GetAllMovies();
 			return View(model);
 
 			//return View(await _movieContext.Movies.ToArrayAsync());
 		}
 
-        ///////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////
 
-        // GET запрос для отображения деталей конкретного выбранного фильма
+		// GET запрос для отображения деталей конкретного выбранного фильма
 
-        public async Task<IActionResult> Details(int? id)
+		public async Task<IActionResult> Details(int? id)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace MovieLayered.Controllers
 		[HttpGet]
 		public async Task< IActionResult> Create()
 		{
-            ViewBag.ListMovies = new SelectList(await _movieService.GetMovies(), "Id", "Title");
+            ViewBag.ListMovies = new SelectList(await _movieService.GetAllMovies(), "Id", "Title");
 			return View();
 		}
 
@@ -109,35 +109,40 @@ namespace MovieLayered.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,Title,Director,Genre,ReleaseYear,Description")] MovieDTO movie, IFormFile uploadedFile)
 		{
-			if (ModelState.IsValid)
-			{
-				await _movieService.CreateMovie(movie);
-				return View("~/Views/Player/Index.cshtml", await _movieService.GetMovies());
-			}
-
-			ViewBag.ListTeams = new SelectList(await _movieService.GetMovies(), "Id", "Name");
-			return View(movie);
-
-
 			//if (ModelState.IsValid)
 			//{
-			//	if (uploadedFile != null && uploadedFile.Length > 0)
-			//	{
-			//		movie.PosterPath = await UploadPicture(uploadedFile);
-			//	}
-
-			//	// Добавляем фильм в репозиторий
-			//	await _repository.Create(movie);
-
-			//	// Сохраняем изменения в базе данных
-			//	await _repository.Save();
-
-			//	// Перенаправляем на страницу списка фильмов
-			//	return RedirectToAction(nameof(Index));
+			//	await _movieService.CreateMovie(movie);
+			//	return View("~/Views/Movie/Index.cshtml", await _movieService.GetMovies());
 			//}
 
-			//// Если модель не валидна, возвращаем представление с текущими данными фильма
+			//ViewBag.ListTeams = new SelectList(await _movieService.GetMovies(), "Id", "Name");
 			//return View(movie);
+
+
+			if (ModelState.IsValid)
+			{
+				if (uploadedFile != null && uploadedFile.Length > 0)
+				{
+					movie.PosterPath = await UploadPicture(uploadedFile);
+				}
+
+				// Добавляем фильм в репозиторий
+				await _movieService.CreateMovie(movie);
+				
+
+				//await _repository.Create(movie);
+
+				// Сохраняем изменения в базе данных
+				//await _repository.Save();
+
+				// Перенаправляем на страницу списка фильмов
+				return RedirectToAction(nameof(Index));
+			}
+
+			ViewBag.ListTeams = new SelectList(await _movieService.GetAllMovies(), "Id", "Title"); // ???
+			//return View(movie);
+			// Если модель не валидна, возвращаем представление с текущими данными фильма
+			return View(movie);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////
@@ -152,6 +157,7 @@ namespace MovieLayered.Controllers
 				{
 					return NotFound();
 				}
+
 				MovieDTO movie = await _movieService.GetMovie((int)id);
 				return View(movie);
 			}
@@ -165,14 +171,28 @@ namespace MovieLayered.Controllers
 		// GET запрос на редактирования фильма
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(MovieDTO movie)
+		public async Task<IActionResult> Edit([Bind("Id,Title,Director,Genre,ReleaseYear,Description")] MovieDTO movie, IFormFile uploadedFile)
 		{
 			if (ModelState.IsValid)
 			{
+				if (uploadedFile != null && uploadedFile.Length > 0)
+				{
+					movie.PosterPath = await UploadPicture(uploadedFile);
+				}
+
 				await _movieService.UpdateMovie(movie);
-				return View("~/Views/Player/Index.cshtml", await _movieService.GetMovies());
+				return RedirectToAction(nameof(Index));
+				//return View("~/Views/Movie/Index.cshtml", await _movieService.GetMovies());
 			}
 			return View(movie);
+
+
+			//if (ModelState.IsValid)
+			//{
+			//	await _movieService.UpdateMovie(movie);
+			//	return View("~/Views/Movie/Index.cshtml", await _movieService.GetMovies());
+			//}
+			//return View(movie);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////
@@ -181,19 +201,36 @@ namespace MovieLayered.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Delete(int? id)
 		{
-			try
+			//try
+			//{
+			//	if (id == null)
+			//	{
+			//		return NotFound();
+			//	}
+
+			//	MovieDTO movie = await _movieService.GetMovie((int)id);
+
+			//	return View(movie);
+			//}
+			//catch (ValidationException ex)
+			//{
+			//	return NotFound(ex.Message);
+			//}
+
+			//if (id == null || await _movieService.GetAllMovies() == null)
+			if (id == null)
 			{
-				if (id == null)
-				{
-					return NotFound();
-				}
-				MovieDTO movie = await _movieService.GetMovie((int)id);
-				return View(movie);
+				return NotFound();
 			}
-			catch (ValidationException ex)
+
+			var movie = await _movieService.GetMovie((int)id);
+
+			if (id == null)
 			{
-				return NotFound(ex.Message);
+				return NotFound();
 			}
+
+			return View(movie);
 		}
 
 		// POST запрос для удаления фильма
@@ -202,7 +239,36 @@ namespace MovieLayered.Controllers
 		public async Task<IActionResult> DeleteConfirmed(int id)
 		{
 			await _movieService.DeleteMovie(id);
-			return View("~/Views/Player/Index.cshtml", await _movieService.GetMovies());
+			return RedirectToAction(nameof(Index));
+
+			//var movie = await _movieService.GetMovie(id);
+
+			//if (movie == null)
+			//{
+			//	return NotFound("Фильм не найден.");
+			//}
+
+			//await _movieService.DeleteMovie(id);
+
+			//return RedirectToAction(nameof(Index));
+
+			//////await _movieService.DeleteMovie(id);
+			//////return View("~/Views/Movie/Index.cshtml", await _movieService.GetMovies());
+
+			////if (await _movieService.GetMovies() == null)
+			////{
+			////	return Problem("В базе данных нет фильмов");
+			////}
+
+			////var movie = await _movieService.GetMovie((int)id);
+
+			////if (movie != null)
+			////{
+			////	_movieService.DeleteMovie(id);
+			////}
+
+			////await _movieService.UpdateMovie(movie);
+			////return RedirectToAction(nameof(Index));
 		}
 
 
@@ -212,7 +278,7 @@ namespace MovieLayered.Controllers
 
 		///////////////////////////////////////////////////////////////////////////////////////////
 
-		// Вспомогательный метод для проверки существования фильма
+		// Вспомогательный метод для проверки существования фильма		
 		private async Task<bool> MovieExists(int id)
 		{
 			var movie = await _movieService.GetMovie(id);
